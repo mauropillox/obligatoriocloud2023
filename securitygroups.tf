@@ -47,7 +47,6 @@ resource "aws_security_group" "http_sg" {
   }
 }
 
-# Resource for the EKS cluster security group
 resource "aws_security_group" "eks_cluster_sg" {
   name        = "eks-cluster-sg"
   description = "Security group for EKS cluster"
@@ -65,41 +64,72 @@ resource "aws_security_group" "eks_cluster_sg" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]  # Agrega aquí las direcciones IP permitidas para SSH
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 }
 
 
-# # Resource for the DB security group
-# resource "aws_security_group" "db_sg" {
-#   name        = "grupo-seguridad-db"
-#   description = "Security group for RDSzsdatabase"
-#   vpc_id      = aws_vpc.vpc_obligatoriozsid
+# Resource for the DB security group
+resource "aws_security_group" "db_sg" {
+  name        = "grupo-seguridad-db"
+  description = "Security group for RDSzsdatabase"
+  vpc_id      = aws_vpc.vpc_obligatorio.id
 
-#   ingress {
-#     from_port       = 3306
-#     to_port         = 3306
-#     protocol        = "tcp"
-#     security_groups = [aws_security_grozsp.http_sg.id]
-#   }
+  ingress {
+    from_port       = 3306
+    to_port         = 3306
+    protocol        = "tcp"
+    security_groups = [aws_security_group.http_sg.id]
+  }
 
-#   tags = {
-#     Name      = "grupo-seguridad-db"
-#     terraform = "True"
-#   }
-# }
+  tags = {
+    Name      = "grupo-seguridad-db"
+    terraform = "True"
+  }
+}
 
-# # Crea un grupo de seguridad para Redis
-# resource "aws_security_group" "redis_sg" {
-#   name        = "obligatorio-redis-sg"
-#   description = "Security group for Redis"
-#   vpc_id      = aws_vpc.vpc_obligatorio.id
+# Crea un grupo de seguridad para Redis
+resource "aws_security_group" "redis_sg" {
+  name        = "obligatorio-redis-sg"
+  description = "Security group for Redis"
+  vpc_id      = aws_vpc.vpc_obligatorio.id
 
-#   ingress {
-#     from_port   = 6379
-#     to_port     = 6379
-#     protocol    = "tcp"
-#     cidr_blocks = ["0.0.0.0/0"]
-#   }
-# }
+  ingress {
+    from_port   = 6379
+    to_port     = 6379
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
 
+# Security Group para permitir acceso HTTP al bucket de S3
+resource "aws_security_group" "s3_access_sg" {
+  name        = "grupo-seguridad-s3-access"
+  description = "Security group for S3 bucket access"
+
+  ingress {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name      = "grupo-seguridad-s3-access"
+    terraform = "True"
+  }
+}

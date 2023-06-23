@@ -28,36 +28,26 @@ output "public_subnet_cidr2" {
   value       = aws_subnet.obligatorio_public_subnet2.cidr_block
 }
 
+output "db_sg_id" {
+  value = aws_security_group.db_sg.id
+}
 
-# output "db_sg_id" {
-#   value = aws_security_group.db_sg.id
-# }
-
-# # Output del endpoint del cluster EKS
-# output "endpoint" {
-#   value = aws_eks_cluster.obligatorio-cluster.endpoint
-# }
-# # Output para el certificado de authority data de EKS
-# output "kubeconfig-certificate-authority-data" {
-#   value = aws_eks_cluster.obligatorio-cluster.certificate_authority[0].data
-# }
-
-# Output para la dirección IP pública del servidor web del frontend
 output "frontend_ip" {
   value = aws_instance.obligatorio_frontend.public_ip
 }
 
-# Output para el ID de la instancia del servidor web del frontend
 output "frontend_instance_id" {
   value = aws_instance.obligatorio_frontend.id
 }
 
-# # Output para el ID de la instancia de base de datos
-# output "database_instance_id" {
-#   value = aws_db_instance.obligatorio_database.id
-# }
+output "database_instance_id" {
+  value = aws_db_instance.obligatorio_database.id
+}
 
-# # Output para el ID del grupo de objetivos
-# output "target_group_attachment_id" {
-#   value = aws_lb_target_group_attachment.obligatorio_frontend.id
-# }
+output "target_group_attachment_id" {
+  value = aws_lb_target_group_attachment.obligatorio_frontend.id
+}
+
+output "s3_bucket_url" {
+  value = "http://${aws_s3_bucket.obligatorio_bucket.bucket}.s3-website-${var.region}.amazonaws.com"
+}

@@ -20,8 +20,8 @@ public_subnet_cidr    = "10.0.1.0/24" # Replace with the appropriate public subn
 private_subnet_cidr   = "10.0.2.0/24" # Replace with the appropriate private subnet CIDR block
 private_subnet_cidr_2 = "10.0.3.0/24" # Replace with the appropriate second private subnet CIDR block
 public_subnet_cidr2   = "10.0.4.0/24"
-vpc_aws_az            = "us-east-1a"  # Replace with the appropriate Availability Zone for the VPC
-vpc_aws_az_2          = "us-east-1b"  # Replace with the appropriate Availability Zone for the second private subnet
+vpc_aws_az            = "us-east-1a" # Replace with the appropriate Availability Zone for the VPC
+vpc_aws_az_2          = "us-east-1b" # Replace with the appropriate Availability Zone for the second private subnet
 
 # Cluster configuration
 cluster_name    = "obligatorio-cluster"
@@ -31,7 +31,6 @@ eks_version     = "1.27"
 # Security configuration
 # profile    = "[default]"
 region     = "us-east-1"
-access_key = "ASIA25IOHIQZC5IQBCVT"
-secret_key = "7M9TaIzwDCU12VMdwMmQ7yKByqESF8c1FrdLB4MV"
-token      = "FwoGZXIvYXdzEKf//////////wEaDC3PzFh5gMmn/vys8iK2AQbq1+W4RBooItKFurN4MS9Idh6kuT3FGpAyW9kSHrZX/t33rwTY869b8I/ePHk/K7B1sjJKmKxoYUhxpTeY/bVrvt/BrjEFNUXPlIkGFk1FdENixN+ew+LMPtdBdTzZOK9CQWkhKVBwWlzKiq0vP1KwR3GY2mH3U++AWmOeRd2M1wbJQghEB1Z4AbLIMpRqg8WBwBN6yaJHHTZY7l4SbuICizu/g3TYrQf8j5q5tylMjFN0bX9LKNCy1qQGMi3VdYNP/VcCOuifk/IQzbtl8lNwjY8aj3C4tuUsLZI6IYL7MGt3lpxqmyn7w5c="
-# Other variable assignments
+access_key = "ASIA25IOHIQZGZQQDU45"
+secret_key = "080aNO5s4eq8yOkdc0LIxeI2wWxjMXQLvRMJVDkn"
+token      = "FwoGZXIvYXdzEK///////////wEaDFgyAw7GlCQjCGynEiK2AUESvg6xiKlSmoab9dlRNbq0PB6FWrLhnEqjCjCVs1F2tej0ZD9xWCEt9Rsi7ysusboVE9RwyoT2suXVEEe0D0JKjsmNaQXdMQKeWvG/Pl9ci2ORxOMD4GC4x8i9efKALQymf75rAbULWQ99Aq2PHTUci8i/pTgDIzfkt4tNZvFx7YImQJJvhmd/xJrl+jLr6S55sl6bWfhSQ900VTaY+GvjFssXw336NZ4cWSNy2tnN4cEt3CmxKMyY2KQGMi3AcajmylgHAoq/ws/wqlYohwVFDPbX2I1xipMlPR5gqP32nggEUXnpeCljzsE="

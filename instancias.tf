@@ -13,7 +13,10 @@ resource "aws_instance" "obligatorio_frontend" {
 
   subnet_id = aws_subnet.obligatorio_public_subnet.id
 
-  depends_on = [aws_eks_cluster.obligatorio_cluster]  # Update the dependency with the correct resource name
+  depends_on = [
+    aws_eks_cluster.obligatorio_cluster,
+    aws_eks_node_group.obligatorio_node_group
+  ] # Update the dependency with the correct resource name
 
   provisioner "remote-exec" {
     connection {
@@ -45,121 +48,49 @@ resource "aws_instance" "obligatorio_frontend" {
       "aws eks --region ${var.region} update-kubeconfig --name ${var.cluster_name} --profile default",
       "kubectl get nodes",
       "echo 'Kubeconfig actualizado para el clúster ${var.cluster_name}'",
-      "sudo cat /tmp/aws_configure_output"
-      ""
-      "kubectl apply -f kubernetes-manifests.yaml"
-      "kubectl apply -f kubernetes-manifests.yaml"
-      "kubectl apply -f kubernetes-manifests.yaml"
-      "kubectl apply -f kubernetes-manifests.yaml"
-      "kubectl apply -f kubernetes-manifests.yaml"
-      "kubectl apply -f kubernetes-manifests.yaml"
-      "kubectl apply -f kubernetes-manifests.yaml"
-      ""
-      ""
-      ""
-      ""
+      "sudo cat /tmp/aws_configure_output",
+      "sudo yum install git -y",
+      "git init",
+      "git config --global init.defaultBranch main",
+      "git clone https://github.com/mauropillox/deployments2023",
+      "ls -ltr",
+      "kubectl get pods",
+      "cd /home/ec2-user/deployments2023/redis/deployment",
+      "kubectl apply -f kubernetes-manifests.yaml",
+      "cd /home/ec2-user/deployments2023/adservice/deployment",
+      "kubectl apply -f kubernetes-manifests.yaml",
+      "cd /home/ec2-user/deployments2023/shippingservice/deployment",
+      "kubectl apply -f kubernetes-manifests.yaml",
+      "cd /home/ec2-user/deployments2023/cartservice/deployment",
+      "kubectl apply -f kubernetes-manifests.yaml",
+      "cd /home/ec2-user/deployments2023/currencyservice/deployment",
+      "kubectl apply -f kubernetes-manifests.yaml",
+      "cd /home/ec2-user/deployments2023/emailservice/deployment",
+      "kubectl apply -f kubernetes-manifests.yaml",
+      "cd /home/ec2-user/deployments2023/paymentservice/deployment",
+      "kubectl apply -f kubernetes-manifests.yaml",
+      "cd /home/ec2-user/deployments2023/productcatalogservice/deployment",
+      "kubectl apply -f kubernetes-manifests.yaml",
+      "cd /home/ec2-user/deployments2023/recommendationservice/deployment",
+      "kubectl apply -f kubernetes-manifests.yaml",
+      "cd /home/ec2-user/deployments2023/checkoutservice/deployment",
+      "kubectl apply -f kubernetes-manifests.yaml",
+      "cd /home/ec2-user/deployments2023/loadgenerator/deployment",
+      "kubectl apply -f kubernetes-manifests.yaml",
+      "cd /home/ec2-user/deployments2023/frontend/deployment",
+      "kubectl apply -f kubernetes-manifests.yaml",
+      "kubectl get pods",
+      "kubectl get deployments",
+      "kubectl get services",
+      "sleep 60",
+      "kubectl get pods",
+      "kubectl get deployments",
+      "kubectl get services",
+      # ""
+      # ""
+      # ""
+      # ""
+      # ""
     ]
   }
 }
-
-# # Recurso para el control de stock
-# resource "aws_instance" "obligatorio_stock_control" {
-#   ami           = "ami-03ededff12e34e59e"
-#   instance_type = var.stock_control_instance_type
-
-#   tags = {
-#     Name        = "instance-stock-control"
-#     obligatorio = "True"
-#   }
-
-#   vpc_security_group_ids = [aws_security_group.ssh_sg.id, aws_security_group.http_sg.id]
-
-#   subnet_id = aws_subnet.obligatorio_private_subnet.id
-#   connection {
-#     type        = "ssh"
-#     user        = "ec2-user"
-#     private_key = file("./labsuser.pem")
-#     host        = self.public_ip
-#   }
-#   provisioner "remote-exec" {
-#     inline = [
-#       "sudo curl 'https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip' -o 'awscliv2.zip'",
-#       "sudo unzip awscliv2.zip",
-#       "sudo ./aws/install",
-#       "sudo curl -LO 'https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl'",
-#       "sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl",
-#       "kubectl version --client",
-#       # Agrega aquí cualquier otro comando adicional que desees ejecutar en la instancia
-#     ]
-#   }
-
-#   # Rest of the configuration for the stock control server...
-# }
-
-# # Recurso para el carrito de compras
-# resource "aws_instance" "obligatorio_shopping_cart" {
-#   ami           = "ami-03ededff12e34e59e"
-#   instance_type = var.shopping_cart_instance_type
-
-#   tags = {
-#     Name        = "instance-shopping-cart"
-#     obligatorio = "True"
-#   }
-
-#   vpc_security_group_ids = [aws_security_group.ssh_sg.id, aws_security_group.http_sg.id]
-
-#   subnet_id = aws_subnet.obligatorio_private_subnet.id
-#   connection {
-#     type        = "ssh"
-#     user        = "ec2-user"
-#     private_key = file("./labsuser.pem")
-#     host        = self.public_ip
-#   }
-#   provisioner "remote-exec" {
-#     inline = [
-#       "sudo curl 'https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip' -o 'awscliv2.zip'",
-#       "sudo unzip awscliv2.zip",
-#       "sudo ./aws/install",
-#       "sudo curl -LO 'https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl'",
-#       "sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl",
-#       "kubectl version --client",
-#       # Agrega aquí cualquier otro comando adicional que desees ejecutar en la instancia
-#     ]
-#   }
-
-#   # Rest of the configuration for the shopping cart server...
-# }
-
-# # Recurso para el catálogo
-# resource "aws_instance" "obligatorio_product_catalog" {
-#   ami           = "ami-03ededff12e34e59e"
-#   instance_type = var.product_catalog_instance_type
-
-#   tags = {
-#     Name        = "instance-product-catalog"
-#     obligatorio = "True"
-#   }
-
-#   vpc_security_group_ids = [aws_security_group.ssh_sg.id, aws_security_group.http_sg.id]
-
-#   subnet_id = aws_subnet.obligatorio_private_subnet_2.id
-#   connection {
-#     type        = "ssh"
-#     user        = "ec2-user"
-#     private_key = file("./labsuser.pem")
-#     host        = self.public_ip
-#   }
-#   provisioner "remote-exec" {
-#     inline = [
-#       "sudo curl 'https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip' -o 'awscliv2.zip'",
-#       "sudo unzip awscliv2.zip",
-#       "sudo ./aws/install",
-#       "sudo curl -LO 'https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl'",
-#       "sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl",
-#       "kubectl version --client",
-#       # Agrega aquí cualquier otro comando adicional que desees ejecutar en la instancia
-#     ]
-#   }
-
-#   # Rest of the configuration for the product catalog server...
-# }
