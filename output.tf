@@ -49,5 +49,5 @@ output "target_group_attachment_id" {
 }
 
 output "s3_bucket_url" {
-  value = "http://${aws_s3_bucket.obligatorio_bucket.bucket}.s3-website-${var.region}.amazonaws.com"
+  value = "http://${aws_s3_bucket.obligatorio_bucket1.bucket}.s3-website-${var.region}.amazonaws.com"
 }
