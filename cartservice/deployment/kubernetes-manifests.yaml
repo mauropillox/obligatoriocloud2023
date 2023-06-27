@@ -21,7 +21,8 @@ spec:
         - containerPort: 7070
         env:
         - name: REDIS_ADDR
-          value: "redis-cart:6379"
+          # value: "$(REDIS_URL)" #URL de Elastic Cache Redis
+          value: "redis-cart:6379" #URL de Elastic Cache Redis
         resources:
           requests:
             cpu: 200m
