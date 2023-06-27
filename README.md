@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <p align="center">
 <img src="src/frontend/static/icons/Hipster_HeroLogoCyan.svg" width="300" alt="Online Boutique" />
 </p>
@@ -44,3 +45,7 @@ Find **Protocol Buffers Descriptions** at the [`./pb` directory](./pb).
 | [recommendationservice](./src/recommendationservice) | Python        | Recommends other products based on what's given in the cart.                                                                      |
 | [adservice](./src/adservice)                         | Java          | Provides text ads based on given context words.                                                                                   |
 | [loadgenerator](./src/loadgenerator)                 | Python/Locust | Continuously sends requests imitating realistic user shopping flows to the frontend.                                              |
+=======
+# obligatoriocloud2023
+Obligatorio Cloud 2023
+>>>>>>> 596836bea6773124a4aac5c72b3af638384409a8
